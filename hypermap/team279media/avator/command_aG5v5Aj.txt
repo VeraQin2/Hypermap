@@ -1,0 +1,32 @@
+建Django project:
+django-admin.py startproject name
+打开project文件夹
+python manage.py startapp name
+启动project： python manage.py runserver
+
+Use Django to generate the database with:
+	python manage.py makemigrations
+and then:
+	python manage.py migrate
+
+要删掉数据库全部table的话，删掉db.sqlite3和app里的migrates文件夹
+如果app里的migarate删掉了的话，需要在makemigrations后面specify app name
+清空数据库：python manage.py flush
+
+We strongly recommend that you use the Django-environed interactive Python shell to help
+develop and test your work; you can access the shell with python manage.py shell.
+
+
+Change git username at terminal:
+git credential-osxkeychain erase
+host=github.com
+protocol=https
+
+Git忽略某些文件
+创建: touch .gitignore
+在gitignore文件中加入要忽略的文件名
+对于已经track的文件，要删除本地缓存：git rm --cache filename
+
+创建全局的gitignore: touch ~/.gitignore
+加入文件名
+将该文件加入git配置：git config --global core.excludesfile ~/.gitignore

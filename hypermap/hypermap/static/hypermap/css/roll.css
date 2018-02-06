@@ -1,0 +1,96 @@
+ol,ul{
+    list-style:none;
+}
+.web_title {
+    position:fixed;
+    color: white;
+    text-align: center;
+    font-size: 60px;
+    top:25%;
+    left:10%;
+    text-shadow: 0px 0px 20px #333333;
+}
+.click_below_warper{
+    position:relative;
+    display: flex;
+    justify-content: center;
+    top:40%;
+    text-align: center;
+}
+.click_below {
+    display: flex;
+    justify-content: center;
+    background-color: #FDF3E7;
+    width: 300px;
+    font-size: 30px;
+    text-align: center;
+    color:#C63D0F;
+}
+.poster-main{ 
+    position:relative;
+    left:5%;
+    top:55%;
+}
+.poster-main a,.poster-main img{
+    display:block;
+}
+.poster-main .poster-list{ 
+    width:800px;
+    height:270px;
+}
+.poster-main .poster-list .poster-item{
+    position:absolute;
+    left:0;
+    top:0;
+}
+
+/*
+.poster-list input,
+.poster-list a{
+  cursor: pointer;
+}
+
+.poster-list input{
+  opacity: 0;
+  z-index: 1000;
+}
+
+.poster-list a{
+  z-index: 10;
+}
+
+#st-picture-1:checked ~ .st-scroll {
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  transform: translateY(-100%);
+}*/
+
+.poster-main .poster-btn{
+    position:absolute;
+    top:0;
+    width:100px;
+    height:270px;
+    z-index:10;
+    cursor:pointer;
+    opacity:0.8
+}
+.poster-main .poster-prev-btn{
+    left:0;
+    background: url(../images/btn_l.png) no-repeat center center;
+}
+.poster-main .poster-next-btn{
+    right:0;
+    background: url(../images/btn_r.png) no-repeat center center;
+}
+.poster-main .text{
+    text-align: center;
+}
+.poster-main .text-list{
+    text-align: center;
+}
+.poster-main .poster-item{
+    text-align: center;
+}
+

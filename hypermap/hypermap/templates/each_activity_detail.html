@@ -1,0 +1,26 @@
+<div>
+  <div class='title'>
+    {% if picture %}
+    <div style='text-align: center'>
+      <img src='{% url "photo" id %}' alt='Cannot load image'>
+    </div>
+    {% endif %}
+  </div>
+  <div class='detail'>
+    <h3><i>Details</i></h3>
+    <p>{{ content }}</p>
+    <h3><i>Event Date</i></h3>
+    <span class='blog-post-meta'>{{start_date}} {{start_time}} to {{end_date}} {{end_time}}</span>
+    <h3><i>Location</i></h3>
+    <span class='blog-post-meta'>{{ address }}</span>
+  </div>
+
+  {% if videos %}
+  <div class='video_display'>
+    <h4>Videos</h4>
+    <video name='video' controls>
+      <source src='{% url "video" id %}' type='video/mp4'>
+    </video>
+  </div>
+  {% endif %}
+</div>

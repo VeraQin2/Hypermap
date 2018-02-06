@@ -1,0 +1,180 @@
+{% extends "hypermap/base_m.html" %}
+
+{% block title %}User-Page{% endblock %}
+{% load static %}
+{% block js %}
+    <script src="{% static 'hypermap/js/magicsuggest-min.js' %}"></script>
+    <script src="{% static 'hypermap/js/map_api.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="{% static 'hypermap/js/chart.js' %}" type="text/javascript"></script>
+    <script type="text/javascript" src="{% static 'hypermap/js/roll.js'%}"></script>
+{% endblock %}
+
+{% block sidebar %}
+  <div id="activity_bar">
+    <button id="activity" class="button button-glow button-caution button-circle button-large btn_add_activity"><i class="fa fa-plus"></i></button>
+    <ul class="nav justify-content-center">
+      <li class="bar_title">Activities</li>
+    </ul>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a id="get_past" class="nav-link">Past</a >
+      </li>
+      <li class="nav-item">
+        <a id="get_now" class="nav-link">Present</a >
+      </li>
+      <li class="nav-item">
+        <a id="get_future" class="nav-link">Future</a >
+      </li>
+    </ul>
+
+    <div id="magicsuggest"></div>
+
+    <div class="top">
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block float %}
+    <div id="floating-panel">
+      <button id="heatmap" class="button button-glow button-caution button-rounded btn_heatmap">Heat</button>
+      <button id="find_path" class="button button-glow button-caution button-rounded btn_heatmap">Find Path</button>
+      <button id="back" style="display: none" class="button button-glow button-caution button-rounded btn_heatmap">Back</button>
+    </div>
+
+    <div id="floating-dialog" class="floating-dialog">
+        <form id="activityForm" enctype="multipart/form-data" method="POST">
+            <div class="form-group">
+            {% for field in form.visible_fields %}
+              {% if field.label == "Study" or field.label == "Music" or field.label == "Sports"%}
+                {{field.label}}{{field}}
+              {% else %}
+                {{field.label}}{{field}}<br>
+              {% endif %}
+            {% endfor %}
+            <br>
+            <input id="submitAct" class="button button-glow button-caution button-rounded button-small btn_act" type="button" value="Submit">
+            <input id="cancelAct" class="button button-glow button-caution button-rounded button-small btn_act" type="button" value="Cancel">
+            </div>
+        {% csrf_token %}
+        </form>
+    </div>
+
+{% endblock %}
+
+
+{% block roll %}
+    <div class="web_title animated bounce">
+
+    <p>Welcome to Hypermap!<br />Click below and go to your favorite place</p>
+    </div>
+    <div class="click_below_warper">
+    <div class="click_below animated flash">
+    </div>
+    </div>
+    <div class="J_Poster poster-main" data-setting='{"width":1300,
+                                                    "height":300,
+                                                    "posterWidth":270,
+                                                    "posterHeight":270,
+                                                    "scale":0.8,
+                                                    "autoPlay":true,
+                                                    "delay":2000,
+                                                    "speed":300}'>
+  	  <div class="poster-btn poster-prev-btn"></div>
+        <ul class="poster-list">
+        	<li class="poster-item img1"><a href="#mapPage"><img src="../../static/hypermap/images/1.png" width="100%" height="100%"></a>
+          </li>
+            <li class="poster-item img2"><a href="#mapPage"><img src="../../static/hypermap/images/2.png" width="100%" height="100%"></a></li>
+            <li class="poster-item img3"><a href="#mapPage"><img src="../../static/hypermap/images/3.png" width="100%" height="100%"></a></li>
+            <li class="poster-item img4"><a href="#mapPage"><img src="../../static/hypermap/images/4.png" width="100%" height="100%"></a></li>
+            <li class="poster-item img5"><a href="#mapPage"><img src="../../static/hypermap/images/5.png" width="100%" height="100%"></a></li>
+            <li class="poster-item img2"><a href="#mapPage"><img src="../../static/hypermap/images/2.png" width="100%" height="100%"></a></li>
+            <li class="poster-item img3"><a href="#mapPage"><img src="../../static/hypermap/images/3.png" width="100%" height="100%"></a></li>
+            <li class="poster-item img4"><a href="#mapPage"><img src="../../static/hypermap/images/4.png" width="100%" height="100%"></a></li>
+            <li class="poster-item img5"><a href="#mapPage"><img src="../../static/hypermap/images/5.png" width="100%" height="100%"></a></li>
+        </ul>
+      <div class="poster-btn poster-next-btn"></div>
+    </div>
+{% endblock %}
+
+{% block profile %}
+  <div class="profileName">
+    <div class="act_entry">
+      Hi, <span><i>{{ user.username }}</i></span>
+      <br>
+    </div>
+    <div class="profileActivity">
+      {% if activities %}
+        {% for act in activities %}
+          <div class="entry">
+            <span class="act_entry">{{act.title}}</span>
+            {% for t in act.tags.all %}
+              <span class="badge badge-secondary">{{t.tag}}</span>
+            {% endfor %}
+            <button class="button button-glow button-caution button-small button-rounded" data-toggle="modal" data-target="#deleteModal" onclick="deleteActivity({{act.id}})">Delete</button>
+            <br>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div id="profileHeader">
+          <h2>Host your first activity now!  <i class="fa fa-smile-o" aria-hidden="true"></i></h2>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+
+  <div id="calendar-panel" class="calendar">
+    <iframe class="calendar_bar" src="https://calendar.google.com/calendar/embed?src={{account1}}%40{{account2}}&ctz=America/New_York" style="border: 0" frameborder="0" scrolling="no"></iframe>
+  </div>
+  <div class="chart-panel">
+    <canvas id="myChart" width="200" height="100"></canvas>
+  </div>
+{% endblock %}
+
+
+{% block script %}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzoV5APs7l7yiVLU5RSNSrIEY6RAL0_kU&callback=myMap&libraries=visualization"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+ 
+
+      <!-- ** Don't forget to Add jQuery here ** -->
+      <script src="{% static 'hypermap/js/config.js' %}"></script>
+      <script src="{% static 'hypermap/js/util.js' %}"></script>
+      <script src="{% static 'hypermap/js/jquery.emojiarea.js' %}"></script>
+      <script src="{% static 'hypermap/js/emoji-picker.js' %}"></script>
+      <!-- End emoji-picker JavaScript -->
+
+      <script>
+        $(function() {
+          // Initializes and creates emoji set from sprite sheet
+          window.emojiPicker = new EmojiPicker({
+            emojiable_selector: '[data-emojiable=true]',
+            assetsPath: "{% static 'hypermap/images/img' %}",
+            popupButtonClasses: 'fa fa-smile-o'
+          });
+          // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+          // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+          // It can be called as many times as necessary; previously converted input fields will not be converted again
+          window.emojiPicker.discover();
+        });
+      </script>
+      <script>
+        // Google Analytics
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-49610253-3', 'auto');
+        ga('send', 'pageview');
+
+      </script>
+
+{% endblock %}
+
+
+
+

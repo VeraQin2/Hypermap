@@ -1,0 +1,10 @@
+<div class='entry'>
+    <span><a href='' class='act_entry' data-toggle='modal' data-target='#exampleModalLong' onclick='getActivityDetail({{id}})'>{{title}}</a ></span>
+    <!-- <button data-toggle='modal' data-target='#exampleModalLong' onclick='getActivityDetail({{id}})'>click</button> -->
+    {% for t in tags.all %}
+    <span class='badge badge-secondary act_tag'>{{t.tag}}</span>
+    {% endfor %}
+    <br>
+    <span class='act_entry'>{{content}}</span><br>
+    <p class='blog-post-meta act_entry'>{{time}} held by {{user}}</p >
+</div>

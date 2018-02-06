@@ -1,0 +1,1 @@
+{"id":{{activity.id}}, "html":"{{activity.html|safe}}","profile_html":"{{activity.profile_html|safe}}","lat":{{activity.lat}},"lng":{{activity.lng}}}

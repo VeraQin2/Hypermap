@@ -1,0 +1,1 @@
+{"id":{{activity.id}},"html":"{{activity.detail_html|safe}}","title":"{{activity.title}}", "joined":"{{joined}}", "lat": "{{activity.lat}}", "lng": "{{activity.lng}}"}

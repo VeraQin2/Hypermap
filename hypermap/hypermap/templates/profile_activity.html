@@ -1,0 +1,8 @@
+<div class='entry'>
+    <span>{{title}}</span>
+    {% for t in act.tags.all %}
+    <span class='badge badge-secondary'>{{t.tag}}</span>
+    {% endfor %}
+    <button class='button button-glow button-caution button-small button-rounded' data-toggle='modal' data-target='#deleteModal' onclick='deleteActivity({{id}})'>Delete</button>
+    <br>
+</div>

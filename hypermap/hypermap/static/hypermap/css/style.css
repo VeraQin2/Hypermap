@@ -1,0 +1,124 @@
+/*
+ * Reference from components and examples on Bootstrap
+ */
+ 
+body {
+  padding-top: 140px;
+  padding-bottom: 40px;
+  background-image: url("../images/cmu.jpg");
+  background-position: center top;
+}
+.header {
+  text-align: center;
+}
+.error {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: red;
+  text-align: center;
+}
+
+div.jumbotron {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+form.form-login {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-login-heading {
+  text-align:center;
+}
+
+.form-login .form-login-heading,
+.form-login .checkbox {
+  margin-bottom: 10px;
+}
+.form-login .checkbox {
+  font-weight: normal;
+}
+.form-login .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-login .form-control:focus {
+  z-index: 2;
+}
+
+.btn-submit {
+  margin-top: 10px;
+}
+
+/*
+ * Override Bootstrap's default container.
+ */
+.container {
+  max-width: 80rem;
+}
+
+
+@media (min-width: 40em) {
+  .blog-title {
+    font-size: 3.5rem;
+  }
+}
+
+
+/*
+ * Global stream page, My profile page
+ */
+.userinfo {
+  border-style: groove;
+  padding:20px;
+}
+.blog-post {
+  border-style: groove;
+  padding:20px;
+  margin-bottom: 4rem;
+}
+.blog-post-meta {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-bottom: 1.25rem;
+  color: #999;
+}
+.blog-post-content {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-bottom: 1.25rem;
+  color: #555;
+}
+
+
+/*
+ * New post page
+ */
+.form-newpost .form-newpost-heading {
+  margin-bottom: 10px;
+}
+.form-newpost textarea{
+  font-size:16px;
+}
+.btn-post {
+  width:160px;
+  height:40px;
+  float:right;
+  margin-top: 10px;
+}
+.btn-photo {
+  width:160px;
+  height:160px;
+}
+.post-time {
+  float:right;
+}
+
+/*
+ * login page
+ */
+.login {
+  text-align: right;
+}
